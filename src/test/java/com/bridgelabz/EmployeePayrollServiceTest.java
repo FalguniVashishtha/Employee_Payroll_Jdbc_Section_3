@@ -1,7 +1,7 @@
 package com.bridgelabz;
 import org.junit.Assert;
 import org.junit.Test;
-
+import java.util.Map;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
@@ -54,5 +54,14 @@ public class EmployeePayrollServiceTest {
         List<EmployeePayrollData> employeePayrollData =
                 employeePayrollService.readEmployeePayrollForDateRange(DB_IO,startDate,endDate);
         Assert.assertEquals(3,employeePayrollData.size());
+    }
+    //UC6
+    @Test
+    public void givenPayrollData_WhenAverageSalaryRetrievedByGender_ShouldReturnProperValue(){
+        EmployeePayrollService employeePayrollService = new EmployeePayrollService();
+        employeePayrollService.readEmployeePayrollData(DB_IO);
+        Map<String, Double>  averageSalaryByGender = employeePayrollService.readAverageSalaryByGender(DB_IO);
+        Assert.assertTrue(averageSalaryByGender.get("M").equals(3000000.0) &&
+                averageSalaryByGender.get("F").equals(3000000.0));
     }
 }
